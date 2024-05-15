@@ -12,8 +12,8 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.test1.Screen1.Screen1
-import com.example.test1.Screen2.Screen2
+import com.example.test1.screen1.Screen1
+import com.example.test1.screen2.Screen2
 
     @OptIn(ExperimentalAnimationApi::class)
     @Composable

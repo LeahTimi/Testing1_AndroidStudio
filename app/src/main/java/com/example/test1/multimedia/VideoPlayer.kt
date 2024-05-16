@@ -1,24 +1,18 @@
 package com.example.test1.multimedia
 
-import android.content.res.Configuration
-import android.hardware.SensorManager
-import android.net.Uri
+import android.content.Context
+import android.content.ContextWrapper
+import android.content.pm.ActivityInfo
 import android.util.Log
-import android.view.SurfaceView
-import android.widget.FrameLayout
+import android.view.ViewGroup
+import androidx.activity.ComponentActivity
 import androidx.annotation.OptIn
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.media3.common.MediaItem
@@ -39,80 +33,67 @@ val url5 = "https://firebasestorage.googleapis.com/v0/b/timonedaconazucar.appspo
 @Composable
 fun VideoPlayer(url: String, full: MutableState<Boolean>) {
     val context = LocalContext.current
-    val player = ExoPlayer.Builder(context).build()
 
-//    val playerView = remember { PlayerView(context) }
-    val playerView =  PlayerView(context)
+    val player = remember { ExoPlayer.Builder(context).build() }
+    val playerView =  remember { PlayerView(context) }
+
     // Bind the player to the view.
     playerView.player = player
-
     // Build the media item.
     val mediaItem = MediaItem.fromUri(url5)
     // Set the media item to be played.
     player.setMediaItem(mediaItem)
-
     // Prepare the player.
     player.prepare()
     // Start the playback.
     // player.play()
-    // -> https://github.com/google/ExoPlayer/issues/1845
-    // -> https://geoffledak.com/blog/2017/09/11/how-to-add-a-fullscreen-toggle-button-to-exoplayer-in-android/
-
-    Box(modifier = Modifier
-        .fillMaxWidth()
-        .fillMaxHeight()
-        .background(color = Color.Black)
-        .rotate(
-            if (full.value){
-                90f
-            } else {
-                0f
-            }
-        )
-        ){
 
         AndroidView(
             factory = { context ->
-                PlayerView(context).apply {
-                    this.player=player
+                playerView.apply {
+                    // FullScreen Button
+                    setFullscreenButtonClickListener { isFullscreen ->
+                        val activity = context.findActivity()
+                        if (isFullscreen) {
+                            activity?.setScreenOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE)
+                        } else {
+                            activity?.setScreenOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+                        }
+                    }
+
+                    setOnClickListener {
+                        full.value = !full.value
+                        Log.d("Lemon","Clicked!")
+                    }
+
+                    // Creo que no es necesario
+                    showController()
+                    useController = true
+                    // ------------------------
                     isSoundEffectsEnabled = true
                     resizeMode = AspectRatioFrameLayout.RESIZE_MODE_FIT
-                    if (full.value){
-                    layoutParams = FrameLayout.LayoutParams(500, 500)
-                    }else {
-
-                    }
+                    layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT)
                     clipToOutline = true
                 }
             },
             modifier = Modifier.fillMaxSize()
         )
     }
+
+// Extension function to find the current activity
+fun Context.findActivity(): ComponentActivity? {
+    var currentContext = this
+    while (currentContext is ContextWrapper) {
+        if (currentContext is ComponentActivity) {
+            return currentContext
+        }
+        currentContext = currentContext.baseContext
+    }
+    return null
 }
 
-// findViewById(Window.ID_ANDROID_CONTENT)
-
-
-@Composable
-fun VideoPaleilo() {
-    val context = LocalContext.current
-    val exoPlayer = ExoPlayer.Builder(context).build()
-    val mediaItem = MediaItem.fromUri(Uri.parse(url4))
-    exoPlayer.setMediaItem(mediaItem)
-
-
-    val playerView = PlayerView(context)
-    playerView.player = exoPlayer
-
-    DisposableEffect(
-        AndroidView(factory = {playerView})
-    ){
-
-        exoPlayer.prepare()
-        exoPlayer.playWhenReady= true
-
-        onDispose {
-            exoPlayer.release()
-        }
-    }
+// Extension function to set screen orientation
+fun Context.setScreenOrientation(orientation: Int) {
+    val activity = findActivity()
+    activity?.requestedOrientation = orientation
 }

@@ -12,8 +12,6 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.test1.screen1.Screen1
-import com.example.test1.screen2.Screen2
 
     @OptIn(ExperimentalAnimationApi::class)
     @Composable
@@ -43,7 +41,7 @@ import com.example.test1.screen2.Screen2
                     )
                 }
             ) {
-                Screen1(navController = navController)
+            //    Screen1(navController = navController)
             }
             composable(
                 route = Screen.Screen2.route,
@@ -68,7 +66,7 @@ import com.example.test1.screen2.Screen2
                     )
                 }
             ) {
-                Screen2(navController = navController)
+            //    Screen2(navController = navController)
             }
         }
     }

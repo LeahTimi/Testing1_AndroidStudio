@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.example.test1.navhost.Navigation
+import com.example.test1.selectores.serieScreen
 import com.example.test1.ui.theme.Test1Theme
 
 class MainActivity : ComponentActivity() {
@@ -13,7 +14,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             Test1Theme {
-                Navigation()
+                serieScreen()
             }
         }
     }

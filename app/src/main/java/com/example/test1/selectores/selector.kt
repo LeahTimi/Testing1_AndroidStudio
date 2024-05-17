@@ -41,6 +41,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.test1.extras.Episode
 import com.example.test1.extras.Season
+import com.example.test1.extras.VideoPlayer
 
 
 @Composable
@@ -56,19 +57,19 @@ import com.example.test1.extras.Season
 
     fun testArray1(){
         for (num in 1..3){
-            val episode = Episode(id = null ,id_episode = 7,nombre = "Episodio ejemplo", episode = num, descripcion = "des des", season = 1)
+            val episode = Episode(id = null ,id_episode = 7,nombre = "Episodio ejemplo", episode = num, descripcion = "des des", season = 1, videoUrl = "")
             arrayEpisodesS1.add(episode)
         }
     }
     fun testArray2(){
         for (num in 1..3){
-            val episode = Episode(id = null ,id_episode = 7,nombre = "Episodio ejemplo", episode = num, descripcion = "des des", season = 2)
+            val episode = Episode(id = null ,id_episode = 7,nombre = "Episodio ejemplo", episode = num, descripcion = "des des", season = 2,videoUrl = "")
             arrayEpisodesS2.add(episode)
         }
     }
     fun testArray3(){
         for (num in 1..3){
-            val episode = Episode(id = null ,id_episode = 7,nombre = "Episodio ejemplo", episode = num, descripcion = "des des", season = 3)
+            val episode = Episode(id = null ,id_episode = 7,nombre = "Episodio ejemplo", episode = num, descripcion = "des des", season = 3,videoUrl = "")
             arrayEpisodesS3.add(episode)
         }
     }
@@ -163,7 +164,7 @@ import com.example.test1.extras.Season
                     modifier = Modifier
                         .fillMaxSize()
                         .clickable {
-
+                        //    VideoPlayer(episode.videoUrl)
                         },
                     text = episode.toString(),
                     textAlign = TextAlign.Center)

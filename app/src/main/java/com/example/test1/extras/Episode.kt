@@ -8,6 +8,7 @@ data class Episode(
     var descripcion: String,
     var episode: Int,
     var season: Int,
+    var videoUrl: String
 ) {
     fun toMap(): MutableMap<String, Any> {
         return mutableMapOf(
@@ -15,7 +16,8 @@ data class Episode(
             "nombre" to this.nombre,
             "descripcion" to this.descripcion,
             "episode" to this.episode,
-            "season" to this.season
+            "season" to this.season,
+            "videoUrl" to this.videoUrl
         ) // Fin del Mutable Map
     }
 

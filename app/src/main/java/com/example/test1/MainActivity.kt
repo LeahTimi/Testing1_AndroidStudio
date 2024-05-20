@@ -34,6 +34,7 @@ import androidx.compose.ui.unit.sp
 import com.example.test1.extras.VideoPlayer
 import com.example.test1.extras.findActivity
 import com.example.test1.extras.setScreenOrientation
+import com.example.test1.navhost.Navigation
 import com.example.test1.navhost.Screen
 import com.example.test1.ui.theme.Test1Theme
 
@@ -43,21 +44,25 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             Test1Theme {
-                val full = remember {
-                    mutableStateOf(true)
-                }
-                val context = LocalContext.current
-                val activity = context.findActivity()
-
-                Log.d("Lemon", activity?.requestedOrientation.toString())
-                Column(modifier = Modifier.fillMaxSize()) {
-                    if (full.value && activity?.requestedOrientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT){
-                        predefiniedTopBar("hey You")
-                    }
-                VideoPlayer(full)
-                }
+                Navigation()
             }
         }
+    }
+}
+@Composable
+fun VideoTest(){
+    val full = remember {
+        mutableStateOf(true)
+    }
+    val context = LocalContext.current
+    val activity = context.findActivity()
+
+    Log.d("Lemon", activity?.requestedOrientation.toString())
+    Column(modifier = Modifier.fillMaxSize()) {
+        if (full.value && activity?.requestedOrientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT){
+            predefiniedTopBar("hey You")
+        }
+        VideoPlayer(full)
     }
 }
 
@@ -85,9 +90,11 @@ fun Context.setScreenOrientation(orientation: Int) {
 fun predefiniedTopBar( topBarText : String){
     CenterAlignedTopAppBar(
         title = {
-            Row (modifier = Modifier.fillMaxWidth().clickable {
-                Log.d("Lemon", "Salisteeeee")
-            },
+            Row (modifier = Modifier
+                .fillMaxWidth()
+                .clickable {
+                    Log.d("Lemon", "Salisteeeee")
+                },
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween)
             {

@@ -12,8 +12,9 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.test1.screen1.Screen1
 
-    @OptIn(ExperimentalAnimationApi::class)
+@OptIn(ExperimentalAnimationApi::class)
     @Composable
     fun Navigation() {
         val navController = rememberNavController()
@@ -41,7 +42,7 @@ import androidx.navigation.compose.rememberNavController
                     )
                 }
             ) {
-            //    Screen1(navController = navController)
+                Screen1()
             }
             composable(
                 route = Screen.Screen2.route,

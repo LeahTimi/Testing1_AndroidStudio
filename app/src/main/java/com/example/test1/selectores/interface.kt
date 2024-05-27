@@ -90,10 +90,113 @@ interface iscreenWithBottomAndTopBar{
         )
     }
 
+    @Composable
+    fun predefiniedBottomBar(){
+        BottomAppBar (containerColor = Color.Black,
+            modifier = Modifier
+        ){
+            // Box 1
+            Box(modifier = Modifier
+                .fillMaxHeight()
+                .width(133.dp)
+                .border(
+                    width = 1.dp,
+                    brush = Brush.horizontalGradient(
+                        colors = listOf(
+                            Color.Black, Color.Black,
+                            Color.Black, Color.Black, Color.White
+                        )
+                    ),
+                    shape = RectangleShape
+                ) )// Modificadores Caja 1 - Bestairio
+            {
+                Column (modifier = Modifier
+                    .fillMaxSize()
+                    .clickable {
+
+                    },
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally)
+                {
+                    ImgIcons(img = R.drawable.bestiario)
+                    Text(
+                        text = "Glosario-Pony",
+                        color = Color.White,
+                        fontSize = 15.sp,
+                        modifier = Modifier,
+                        textAlign = TextAlign.Center)
+                }
+            } // FIN BOX 1
+            // Box 2
+            Box(modifier = Modifier
+                .fillMaxHeight()
+                .width(133.dp)
+                .border(
+                    width = 1.dp,
+                    brush = Brush.horizontalGradient(
+                        colors = listOf(
+                            Color.White, Color.Black,
+                            Color.Black, Color.Black, Color.White
+                        )
+                    ),
+                    shape = RectangleShape
+                ) )// Modificadores Caja 2
+            {
+                Column (modifier = Modifier
+                    .fillMaxSize()
+                    .clickable {
+
+                    },
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally)
+                {
+                    ImgIcons(img = R.drawable.gachamlp)
+                    Text(
+                        text = "Invoca un Pony!",
+                        color = Color.White,
+                        fontSize = 15.sp,
+                        modifier = Modifier,
+                        textAlign = TextAlign.Center)
+                }
+            } // FIN BOX 2
+            // Box 3
+            Box(modifier = Modifier
+                .fillMaxHeight()
+                .width(133.dp)
+                .border(
+                    width = 1.dp,
+                    brush = Brush.horizontalGradient(
+                        colors = listOf(
+                            Color.White, Color.Black,
+                            Color.Black, Color.Black, Color.Black
+                        )
+                    ),
+                    shape = RectangleShape
+                ) )// Modificadores Caja 3
+            {
+                Column (modifier = Modifier
+                    .fillMaxSize()
+                    .clickable {
+
+                    },
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally)
+                {
+                    ImgIcons(img = R.drawable.collection)
+                    Text(
+                        text = "Colección",
+                        color = Color.White,
+                        fontSize = 15.sp,
+                        modifier = Modifier,
+                        textAlign = TextAlign.Center)
+                }
+            } // FIN BOX 3
+        }
+    }
 
     // BOTTOM BAR  to navigate between screens
     @Composable
-    fun predefiniedBottomBar(navController: NavController){
+    fun predefiniedBottomBarNAVHOST(navController: NavController){
         BottomAppBar (containerColor = Color.Black,
             modifier = Modifier
         ){

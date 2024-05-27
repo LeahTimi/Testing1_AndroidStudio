@@ -14,7 +14,9 @@ data class Season(
             "episodes" to this.episodes
         ) // Fin del Mutable Map
     }
-
+    fun name() : String{
+        return "Season $season"
+    }
 }
 
 

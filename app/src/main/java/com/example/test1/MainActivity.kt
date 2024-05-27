@@ -36,6 +36,7 @@ import com.example.test1.extras.findActivity
 import com.example.test1.extras.setScreenOrientation
 import com.example.test1.navhost.Navigation
 import com.example.test1.navhost.Screen
+import com.example.test1.serie.serieScreen
 import com.example.test1.ui.theme.Test1Theme
 
 class MainActivity : ComponentActivity() {
@@ -44,7 +45,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             Test1Theme {
-                Navigation()
+                serieScreen()
             }
         }
     }
